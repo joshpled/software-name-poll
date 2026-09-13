@@ -15,6 +15,8 @@ Run `python3 -m http.server 8000` and open http://localhost:8000. Run `npm run l
 5. In GitHub Settings → Pages, choose Deploy from a branch, `main`, `/ (root)`. `.nojekyll` serves the static files directly.
 6. Open the published page and verify a successful submission and that anonymous API requests cannot read, update, or delete votes.
 
+Configured Supabase project: `vujrrskdxtskmkldvnkj` (East US). The supplied connection placeholders have been replaced with its public configuration.
+
 Intended public URL: https://joshpled.github.io/software-name-poll/
 
 ## Results and limitations
