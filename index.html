@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111111" />
+  <title>Software Company Name Poll</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --card: #ffffff;
+      --text: #151515;
+      --muted: #6d6a63;
+      --border: #dad6cd;
+      --accent: #151515;
+      --accentText: #ffffff;
+      --soft: #ece9e2;
+      --danger: #a33a2a;
+      --success: #28744b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    .wrap {
+      width: min(760px, calc(100% - 32px));
+      margin: 48px auto;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: .98;
+      letter-spacing: -0.045em;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin: 18px 0;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 0 0 5px;
+    }
+
+    .section-copy {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .names {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .name-chip {
+      border: 1px solid var(--border);
+      background: var(--soft);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 750;
+      letter-spacing: .01em;
+    }
+
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      padding: 0 12px;
+      font: inherit;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    select:focus, input:focus {
+      outline: 3px solid rgba(0,0,0,.12);
+      border-color: #777;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    button {
+      width: 100%;
+      min-height: 50px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--accentText);
+      font: inherit;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .message {
+      min-height: 24px;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .error { color: var(--danger); }
+    .success { color: var(--success); }
+
+    .thanks {
+      display: none;
+      text-align: center;
+      padding: 34px 16px;
+    }
+
+    .thanks h2 {
+      font-size: 32px;
+      margin: 0 0 8px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .admin-link {
+      color: inherit;
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 22px, 760px); margin: 28px auto; }
+      .names, .rank-grid { grid-template-columns: 1fr; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section id="poll">
+      <header>
+        <span class="eyebrow">Quick naming poll</span>
+        <h1>Help me name my software company.</h1>
+        <p class="intro">
+          I build websites, web/mobile/desktop apps, custom software, and independent products.
+          Please go with your first impression — don't look up the meanings before voting.
+        </p>
+      </header>
+
+      <div class="card">
+        <h2 class="section-title">The names</h2>
+        <p class="section-copy">Choose the three that feel strongest as a software and product studio.</p>
+        <div class="names" id="nameList"></div>
+      </div>
+
+      <form id="pollForm" class="card" novalidate>
+        <h2 class="section-title">Rank your top 3</h2>
+        <p class="section-copy">Each choice must be different.</p>
+
+        <div class="rank-grid">
+          <div class="field">
+            <label for="first">🥇 First</label>
+            <select id="first" name="first" required></select>
+          </div>
+          <div class="field">
+            <label for="second">🥈 Second</label>
+            <select id="second" name="second" required></select>
+          </div>
+          <div class="field">
+            <label for="third">🥉 Third</label>
+            <select id="third" name="third" required></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="reject">Definitely would NOT choose <span class="optional">(optional)</span></label>
+          <select id="reject" name="reject"></select>
+        </div>
+
+        <div class="field">
+          <label for="comment">Any immediate reaction? <span class="optional">(optional)</span></label>
+          <input id="comment" name="comment" type="text" maxlength="240" placeholder="What stands out — good or bad?" />
+        </div>
+
+        <button id="submitBtn" type="submit">Submit vote</button>
+        <div id="message" class="message" aria-live="polite"></div>
+        <p class="small">One response per browser is encouraged. No account or personal information is required.</p>
+      </form>
+    </section>
+
+    <section id="thanks" class="card thanks">
+      <span class="eyebrow">Vote recorded</span>
+      <h2>Thank you.</h2>
+      <p>Your response has been added to the poll.</p>
+    </section>
+  </main>
+
+  <script>
+    // ------------------------------------------------------------
+    // Public project configuration. Never use a secret or service-role key.
+    // Database grants and Row Level Security enforce insert-only access.
+    // ------------------------------------------------------------
+    const SUPABASE_URL = "PASTE_YOUR_SUPABASE_URL";
+    const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+    const names = [
+      "Protean",
+      "Manifold",
+      "Morphic",
+      "Emergent",
+      "Liminal",
+      "Versant",
+      "Alchemic",
+      "All-Purpose Apps"
+    ];
+
+    const list = document.getElementById("nameList");
+    const form = document.getElementById("pollForm");
+    const selects = ["first", "second", "third", "reject"].map(id => document.getElementById(id));
+    const message = document.getElementById("message");
+    const submitBtn = document.getElementById("submitBtn");
+
+    names.forEach(name => {
+      const chip = document.createElement("div");
+      chip.className = "name-chip";
+      chip.textContent = name;
+      list.appendChild(chip);
+    });
+
+    function populateSelect(select, optional = false) {
+      select.innerHTML = "";
+      const initial = document.createElement("option");
+      initial.value = "";
+      initial.textContent = optional ? "No selection" : "Choose...";
+      select.appendChild(initial);
+
+      names.forEach(name => {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+    }
+
+    populateSelect(selects[0]);
+    populateSelect(selects[1]);
+    populateSelect(selects[2]);
+    populateSelect(selects[3], true);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "";
+      message.className = "message";
+
+      const first = document.getElementById("first").value;
+      const second = document.getElementById("second").value;
+      const third = document.getElementById("third").value;
+      const reject = document.getElementById("reject").value || null;
+      const comment = document.getElementById("comment").value.trim() || null;
+
+      if (!first || !second || !third) {
+        message.textContent = "Please rank a first, second, and third choice.";
+        message.classList.add("error");
+        return;
+      }
+
+      if (new Set([first, second, third]).size !== 3) {
+        message.textContent = "Your top three choices must be different.";
+        message.classList.add("error");
+        return;
+      }
+
+      if (reject && [first, second, third].includes(reject)) {
+        message.textContent = "Your rejected name can't also be in your top three.";
+        message.classList.add("error");
+        return;
+      }
+
+      if (
+        SUPABASE_URL.includes("PASTE_YOUR") ||
+        SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR")
+      ) {
+        message.textContent = "Poll owner: connect Supabase before sharing this page.";
+        message.classList.add("error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting…";
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/name_poll_votes`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_PUBLISHABLE_KEY,
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({
+            first_choice: first,
+            second_choice: second,
+            third_choice: third,
+            reject_choice: reject,
+            comment
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Submission failed (${response.status})`);
+        }
+
+        document.getElementById("poll").style.display = "none";
+        document.getElementById("thanks").style.display = "block";
+      } catch (error) {
+        console.error(error);
+        message.textContent = "Something went wrong. Please try again.";
+        message.classList.add("error");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit vote";
+      }
+    });
+  </script>
+</body>
+</html>

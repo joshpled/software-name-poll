@@ -1,0 +1,8 @@
+{
+  "name": "software-name-poll",
+  "private": true,
+  "scripts": {
+    "lint": "node --check tests/poll.test.cjs && git diff --check",
+    "test": "node --test tests/poll.test.cjs"
+  }
+}
