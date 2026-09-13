@@ -1,15 +1,16 @@
 # Deployment record
 
-## Current status
+## Deployment configuration and verification
 
 - Public repository created: https://github.com/joshpled/software-name-poll
-- Feature branch: `feature/deploy-poll`.
+- Publishing source: `main`, repository root; GitHub Pages branch deployment.
 - Supabase project: `vujrrskdxtskmkldvnkj`, East US (North Virginia), free plan.
 - Schema and insert-only permissions applied. Rollback-only database tests passed.
 - Public HTTP read/update/delete requests and an invalid vote were denied; database error code `42501` confirms privilege enforcement with a valid key.
-- Browser end-to-end submission awaits permission for one disposable test row and cleanup.
-- Production site: not yet published; awaiting completed verification and owner PR review.
-- Draft PR: https://github.com/joshpled/software-name-poll/pull/1
+- Owner reported completing the browser test and approved merge on 2026-09-13. No additional agent test vote is needed.
+- Site URL: https://joshpled.github.io/software-name-poll/
+- Deployment status: https://github.com/joshpled/software-name-poll/actions (Pages publishes after merge).
+- Deployment PR: https://github.com/joshpled/software-name-poll/pull/1
 - Five page tests, syntax/whitespace checks and GitHub Checks pass. Browser rendering and missing-choice validation verified.
 - `main` requires a PR and passing checks; automatic branch deletion is enabled.
 

@@ -16,4 +16,6 @@ Use one feature branch/PR at a time and squash merge after checks and owner revi
 
 ## Decisions log (newest first)
 
-- 2026-09-13 — Keep the existing static page, use publishable-key REST calls and anonymous column-level INSERT plus RLS — minimal dependencies and private results — repeat votes remain possible; see `docs/001-static-poll.md`. Deployment pending.
+- 2026-09-13 — Publish the owner-tested poll through protected `main` on GitHub Pages, backed by Supabase project `vujrrskdxtskmkldvnkj` — database and API permission tests pass — public visitors can submit valid votes but cannot read results; repeat voting is still possible. Owner approved squash merge of PR #1.
+
+- 2026-09-13 — Keep the existing static page, use publishable-key REST calls and anonymous column-level INSERT plus RLS — minimal dependencies and private results — repeat votes remain possible; see `docs/001-static-poll.md`.
