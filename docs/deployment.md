@@ -4,8 +4,11 @@
 
 - Public repository created: https://github.com/joshpled/software-name-poll
 - Feature branch: `feature/deploy-poll`.
-- Supabase provisioning: waiting for an available free project slot.
+- Supabase provisioning: free slot available; creation form prepared, awaiting owner password entry and submission.
 - Production site: not yet published.
+- Draft PR: https://github.com/joshpled/software-name-poll/pull/1
+- Five page tests, syntax/whitespace checks and GitHub Checks pass. Browser rendering and missing-choice validation verified.
+- `main` requires a PR and passing checks; automatic branch deletion is enabled.
 
 ## Before publishing
 
